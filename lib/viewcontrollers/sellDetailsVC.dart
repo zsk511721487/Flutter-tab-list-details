@@ -101,14 +101,11 @@ class _SellTopViewState extends State<SellTopView> {
     );
   }
 
-  StreamController<SellDetails> _streamController =
-      StreamController<SellDetails>();
 
   SellDetails details;
 
   @override
   void dispose() {
-    _streamController.close();
     super.dispose();
   }
 

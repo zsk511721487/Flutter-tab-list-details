@@ -35,48 +35,61 @@ class YouAndMeVCState extends State<YouAndMeVC> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView.builder(
-        // pageSnapping: true,
-        onPageChanged: _pageChange,
-        controller: _pageController,
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return controllers[_currentIndex];
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        tooltip: '记录你的生活',
-        onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context){
-                return AddLifeVC();
-              },fullscreenDialog: true));
-        },
-        backgroundColor: Colors.white,
-        child: Icon(Icons.add,color: Colors.black,),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        shape: CircularNotchedRectangle(),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.toys),
-              onPressed: () {
-                _pageController.jumpToPage(0);
-                _pageChange(0);
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.monetization_on),
-              onPressed: () {
-                _pageController.jumpToPage(1);
-                _pageChange(1);
-              },
-            ),
-          ],
+    return MaterialApp(
+      theme: ThemeData(
+          primaryColor: Colors.black,
+          accentColor: Colors.black,
+          accentIconTheme: IconThemeData(
+            color: Colors.black,
+          ),
+          accentTextTheme: TextTheme(title: TextStyle(color: Colors.black))),
+      home: Scaffold(
+        body: PageView.builder(
+          // pageSnapping: true,
+          onPageChanged: _pageChange,
+          controller: _pageController,
+          itemCount: 2,
+          itemBuilder: (context, index) {
+            return controllers[_currentIndex];
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          tooltip: '记录你的生活',
+          onPressed: () {
+            Navigator.push(context,MaterialPageRoute(
+                builder: (context) {
+                  return AddLifeVC();
+                },
+                fullscreenDialog: true));
+          },
+          backgroundColor: Colors.white,
+          child: Icon(
+            Icons.add,
+            color: Colors.black,
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        bottomNavigationBar: BottomAppBar(
+          shape: CircularNotchedRectangle(),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.toys),
+                onPressed: () {
+                  _pageController.jumpToPage(0);
+                  _pageChange(0);
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.monetization_on),
+                onPressed: () {
+                  _pageController.jumpToPage(1);
+                  _pageChange(1);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
